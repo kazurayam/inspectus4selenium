@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'signing'
+}
+
+group 'com.kazurayam'
+version '0.1.0-SNAPSHOT'
+
+ext {
+    isReleaseVersion = !version.endsWith('SNAPSHOT')
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation libs.selenium.java
+    implementation libs.selenium.support
+    //implementation libs.selenium4
+
+    implementation libs.slf4j.api
+    testRuntimeOnly libs.slf4j.simple
+    testImplementation libs.webdrivermanager
+    testImplementation libs.junit.jupiter
+    testImplementation libs.junit.jupiter.api
+    testRuntimeOnly libs.junit.jupiter.engine
+
+}
+
+test {
+    useJUnitPlatform()
+}
