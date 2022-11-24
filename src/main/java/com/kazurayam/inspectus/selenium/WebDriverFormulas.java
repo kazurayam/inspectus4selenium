@@ -9,8 +9,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class WebDriverFormulas {
+
+    Logger logger = LoggerFactory.getLogger(WebDriverFormulas.class);
 
     public WebDriverFormulas() {}
 
@@ -64,14 +68,18 @@ public final class WebDriverFormulas {
             selenium4constructor = clazz.getConstructor(WebDriver.class, Duration.class);
             return (WebDriverWait)selenium4constructor.newInstance(driver, Duration.ofSeconds(timeout));
         } catch (NoSuchMethodException e) {
-            // no Selenium4 jar is found in the CLASSPATH, so let me try to find Selenium3
+            logger.debug(String.format("%s(WebDriver, Duration) of Selenium4 is NOT found in the CLASSPATH",
+                    fullyQualifiedClassName));
+            logger.debug(String.format("will try to load %s(WebDriver, long) of Selenium3)",
+                    fullyQualifiedClassName));
+            //
             Constructor<?> selenium3constructor;
             try {
-                selenium3constructor = clazz.getConstructor(WebDriver.class, Long.class);
+                selenium3constructor = clazz.getConstructor(WebDriver.class, long.class);
                 return (WebDriverWait)selenium3constructor.newInstance(driver, timeout);
             } catch (NoSuchMethodException x) {
                 throw new IllegalStateException(
-                        String.format("%s is not found in the CLASSPATH", fullyQualifiedClassName),
+                        String.format("%s(WebDriver, long) of Selenium3 is not found in the CLASSPATH", fullyQualifiedClassName),
                         x);
             } catch (InvocationTargetException | InstantiationException | IllegalAccessException ex) {
                 throw new RuntimeException(ex);
