@@ -12,9 +12,8 @@ dependencyResolutionManagement {
             version('materialstore', '0.12.5')
             library('materialstore', 'com.kazurayam', 'materialstore').versionRef('materialstore')
 
-            version('selenium', '3.141.59')
-            library('selenium-java', 'org.seleniumhq.selenium', 'selenium-java').versionRef('selenium')
-            library('selenium-support', 'org.seleniumhq.selenium', 'selenium-support').versionRef('selenium')
+            version('selenium3', '3.141.59')
+            library('selenium3', 'org.seleniumhq.selenium', 'selenium-java').versionRef('selenium3')
 
             version('selenium4', '4.6.0')
             library('selenium4', 'org.seleniumhq.selenium', 'selenium-java').versionRef('selenium4')

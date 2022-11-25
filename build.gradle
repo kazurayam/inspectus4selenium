@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.kazurayam'
-version '0.1.0-SNAPSHOT'
+version '0.1.0'
 
 ext {
     isReleaseVersion = !version.endsWith('SNAPSHOT')
@@ -16,19 +16,31 @@ repositories {
 }
 
 dependencies {
-    implementation libs.selenium.java
-    implementation libs.selenium.support
-    //implementation libs.selenium4
-
     implementation libs.slf4j.api
     testRuntimeOnly libs.slf4j.simple
     testImplementation libs.webdrivermanager
     testImplementation libs.junit.jupiter
     testImplementation libs.junit.jupiter.api
     testRuntimeOnly libs.junit.jupiter.engine
-
 }
 
 test {
     useJUnitPlatform()
 }
+
+// https://stackoverflow.com/questions/56796676/gradle-how-to-run-a-custom-task-with-a-custom-configuration
+task testWithSelenium3(type: Test, dependsOn: test) {
+    dependencies {
+        implementation libs.selenium3
+    }
+    testClassesDirs = sourceSets.test.output.classesDirs
+}
+
+task testWithSelenium4(type: Test, dependsOn: test) {
+    dependencies {
+        implementation libs.selenium4
+    }
+    testClassesDirs = sourceSets.test.output.classesDirs
+}
+
+task testBoth(dependsOn: [testWithSelenium3, testWithSelenium4])
