@@ -22,4 +22,4 @@ How to use them? Please find more info at the following resources:
 
 -   [a sample JUnit5 Testcase](https://github.com/kazurayam/inspectus4selenium/blob/master/src/test/java/com/kazurayam/inspectus/selenium/WebDriverFormulasTest.java)
 
--   [API Javadoc](https://inspectus4selenium.kazurayam.github.com/api/index.html)
+-   [API Javadoc](https://kazurayam.github.io/inspectus4selenium/api/index.html)
