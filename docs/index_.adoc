@@ -4,9 +4,9 @@ The inspectus4selenium provides a small Java class
 
 - https://github.com/kazurayam/inspectus4selenium/blob/master/src/main/java/com/kazurayam/inspectus/selenium/WebDriverFormulas.java[com.kazurayam.inspectus.selenium.WebDriverFormulas]
 
-When you write a web UI test on top of Selenium, you need to be aware of timing issues: you have to repeat writing codes so that your tests wait for pages to be loaded into the browser completely; you have to wait for web element to be present in the DOM before doing any action on ti. You will write "code to wait xxxx" repeately. Consequently your UI tests tend to be verbose and difficult to maintain.
+When you write a web UI test on top of link:https://www.selenium.dev/documentation/webdriver/[Selenium WebDriver], you need to be aware of timing issues: you have to repeat writing codes so that your tests wait for pages to be loaded into the browser completely; you have to wait for web element to be present in the DOM before doing any action on it. You will write codes to wait for conditions to meet repeatedly. Your UI tests tend to be verbose and difficult to maintain.
 
-This class supports automated web UI tests on top of link:https://www.selenium.dev/documentation/webdriver/[Selenium WebDriver]. The `WebDriverFormulas` class implements the following helper methods:
+This `WebDriverFormulas` class supports automated web UI tests on top of Selenium WebDriver. This class implements several helper methods:
 
 * `createWebDriverWait(WebDriver driver, long timemout)`
 * `waitForElementPresent(WebDriver driver, By handle, long timeout)`
@@ -18,6 +18,6 @@ You can use these method in your UI tests. Your code will be much more concise.
 How to use them? Please find more info at the following resources:
 
 * link:https://github.com/kazurayam/inspectus4selenium/blob/master/src/test/java/com/kazurayam/inspectus/selenium/WebDriverFormulasTest.java[a sample JUnit5 Testcase]
-* link:https://inspectus4selenium.kazurayam.github.com/api/index.html[API Javadoc]
+* link:https://kazurayam.github.io/inspectus4selenium/api/index.html[API Javadoc]
 
 Back to the link:https://github.com/kazurayam/inspectus4selenium[project's GitHub repository]
