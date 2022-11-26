@@ -1,3 +1,3 @@
 # inspectus4selenium
 
-See https://inspectus4selenium.kazurayam.github.com/
+See https://kazurayam.github.io/inspectus4selenium/
