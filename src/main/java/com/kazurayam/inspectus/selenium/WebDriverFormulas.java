@@ -18,7 +18,9 @@ import org.slf4j.LoggerFactory;
  * A collection of WebDriver code snippet that are frequently repeated in UI test cases:
  *
  * 1. wait for an HTML element to be present in a HTML in browser
+ *
  * 2. navigate to a URL and wait for the page is completely loaded
+ *
  * 3. send click on an HTML element expecting the browser to navigate to a new page, and wait for the new page is comoletely loaded
  */
 public final class WebDriverFormulas {
@@ -102,7 +104,7 @@ public final class WebDriverFormulas {
      * @param timeout seconds
      * @return an instance of WebDriverWait
      */
-    final WebDriverWait createWebDriverWait(WebDriver driver, long timeout) {
+    public final WebDriverWait createWebDriverWait(WebDriver driver, long timeout) {
         //return new WebDriverWait(driver, timeout);
         Class<?> clazz;
         String fullyQualifiedClassName = "org.openqa.selenium.support.ui.WebDriverWait";
