@@ -19,3 +19,5 @@ How to use them? Please find more info at the following resources:
 
 * link:https://github.com/kazurayam/inspectus4selenium/blob/master/src/test/java/com/kazurayam/inspectus/selenium/WebDriverFormulasTest.java[a sample JUnit5 Testcase]
 * link:https://inspectus4selenium.kazurayam.github.com/api/index.html[API Javadoc]
+
+Back to the link:https://github.com/kazurayam/inspectus4selenium[project's GitHub repository]
