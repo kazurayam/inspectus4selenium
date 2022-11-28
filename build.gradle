@@ -78,8 +78,10 @@ publishing {
             pom {
                 groupId = project.group
                 name = project.rootProject.name
-                description = 'a java clas library that supports time-based performance measurements and compiling text reports in Markdown format'
-                url = 'https://kazurayam.github.io/timekeeper/'
+
+                description = 'A collection of formulas to drive WebDriver'
+                url = "https://kazurayam.github.io/${project.rootProject.name}/"
+
                 from components.java
                 licenses {
                     license {
