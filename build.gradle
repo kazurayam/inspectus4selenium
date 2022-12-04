@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.kazurayam'
-version '0.1.1'
+version '0.2.0-SNAPSHOT'
 
 ext {
     isReleaseVersion = !version.endsWith('SNAPSHOT')
@@ -17,6 +17,10 @@ repositories {
 }
 
 dependencies {
+    implementation libs.ashot
+    implementation libs.httpclient
+    implementation libs.jsoup
+    implementation libs.materialstore
     implementation libs.slf4j.api
     testRuntimeOnly libs.slf4j.simple
     testImplementation libs.webdrivermanager
