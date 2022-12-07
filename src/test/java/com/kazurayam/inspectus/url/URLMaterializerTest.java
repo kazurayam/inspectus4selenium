@@ -1,5 +1,6 @@
-package com.kazurayam.materialstore.base.materialize;
+package com.kazurayam.inspectus.net;
 
+import com.kazurayam.inspectus.TestHelper;
 import com.kazurayam.materialstore.core.filesystem.FileType;
 import com.kazurayam.materialstore.core.filesystem.JobName;
 import com.kazurayam.materialstore.core.filesystem.JobTimestamp;
@@ -16,7 +17,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class URLMaterializerTest {
 
@@ -24,9 +24,8 @@ public class URLMaterializerTest {
 
     @BeforeAll
     public static void beforeAll() throws IOException {
-        Path projectDir = Paths.get(System.getProperty("user.dir"));
-        Path outputDir = projectDir.resolve("build/tmp/testOutput").resolve(URLDownloaderTest.class.getName());
-        Files.createDirectories(outputDir);
+        Path outputDir =
+                TestHelper.createTestClassOutputDir(URLDownloaderTest.class);
         Path root = outputDir.resolve("root");
         store = Stores.newInstance(root);
     }

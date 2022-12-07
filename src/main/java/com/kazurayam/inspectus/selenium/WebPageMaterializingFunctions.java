@@ -1,5 +1,6 @@
-package com.kazurayam.materialstore.base.materialize;
+package com.kazurayam.inspectus.selenium;
 
+import com.kazurayam.inspectus.discovery.Target;
 import com.kazurayam.materialstore.core.filesystem.FileType;
 import com.kazurayam.materialstore.core.filesystem.JobName;
 import com.kazurayam.materialstore.core.filesystem.JobTimestamp;
@@ -20,17 +21,29 @@ import java.awt.image.BufferedImage;
 import java.util.Map;
 import java.util.Objects;
 
-public class MaterializingPageFunctions {
+public class PageMaterializingFunctions {
+
+    private Store store;
+    private JobName jobName;
+    private JobTimestamp jobTimestamp;
+
+    public PageMaterializingFunctions(Store store, JobName jobName, JobTimestamp jobTimestamp) {
+        Objects.requireNonNull(store);
+        Objects.requireNonNull(jobName);
+        Objects.requireNonNull(jobTimestamp);
+        this.store = store;
+        this.jobName = jobName;
+        this.jobTimestamp = jobTimestamp;
+    }
 
     /**
      * get HTML source of the target web page, pretty-print it, save it into
      * the store
      */
-    public static MaterializingPageFunction<Target, WebDriver, StorageDirectory, Map<String,String>, Material>
-            storeHTMLSource = (target, driver, storageDirectory, attributes) -> {
-        Objects.requireNonNull(target);
+    public PageMaterializingFunction<WebDriver, Target, Map<String,String>, Material>
+            storeHTMLSource = (driver, target, attributes) -> {
         Objects.requireNonNull(driver);
-        Objects.requireNonNull(storageDirectory);
+        Objects.requireNonNull(target);
         Objects.requireNonNull(attributes);
         //-------------------------------------------------------------
         // get the HTML source from browser
@@ -45,21 +58,17 @@ public class MaterializingPageFunctions {
                 .putAll(target.getAttributes())
                 .putAll(attributes)
                 .build();
-        Store store = storageDirectory.getStore();
-        JobName jobName = storageDirectory.getJobName();
-        JobTimestamp jobTimestamp = storageDirectory.getJobTimestamp();
-        return store.write(jobName, jobTimestamp, FileType.HTML, metadata, ppHtml);
+        return this.store.write(this.jobName, this.jobTimestamp,
+                FileType.HTML, metadata, ppHtml);
     };
 
     /**
      *
      */
-    public static MaterializingPageFunction<Target, WebDriver, StorageDirectory, Map<String,String>,
-            Material>
-            storeEntirePageScreenshot = (target, driver, storageDirectory, attributes) -> {
-        Objects.requireNonNull(target);
+    public PageMaterializingFunction<WebDriver, Target, Map<String,String>, Material>
+            storeEntirePageScreenshot = (driver, target, attributes) -> {
         Objects.requireNonNull(driver);
-        Objects.requireNonNull(storageDirectory);
+        Objects.requireNonNull(target);
         Objects.requireNonNull(attributes);
         //-------------------------------------------------------------
         int timeout = 500;  // milli-seconds
@@ -82,12 +91,8 @@ public class MaterializingPageFunctions {
                 .putAll(target.getAttributes())
                 .putAll(attributes)
                 .build();
-        Store store = storageDirectory.getStore();
-        JobName jobName = storageDirectory.getJobName();
-        JobTimestamp jobTimestamp = storageDirectory.getJobTimestamp();
-        return store.write(jobName, jobTimestamp, FileType.PNG, metadata, bufferedImage);
+        return this.store.write(this.jobName, this.jobTimestamp,
+                FileType.PNG, metadata, bufferedImage);
     };
-
-    private MaterializingPageFunctions() {}
 
 }

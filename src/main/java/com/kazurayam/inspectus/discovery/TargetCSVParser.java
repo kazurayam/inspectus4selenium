@@ -1,4 +1,4 @@
-package com.kazurayam.materialstore.base.materialize;
+package com.kazurayam.inspectus.discovery;
 
 import com.kazurayam.materialstore.core.filesystem.MaterialstoreException;
 

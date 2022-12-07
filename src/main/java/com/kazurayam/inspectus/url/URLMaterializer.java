@@ -1,4 +1,4 @@
-package com.kazurayam.materialstore.base.materialize;
+package com.kazurayam.inspectus.net;
 
 import com.kazurayam.materialstore.core.filesystem.FileType;
 import com.kazurayam.materialstore.core.filesystem.JobName;

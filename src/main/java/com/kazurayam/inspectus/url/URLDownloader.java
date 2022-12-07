@@ -1,4 +1,4 @@
-package com.kazurayam.materialstore.base.materialize;
+package com.kazurayam.inspectus.net;
 
 import java.io.IOException;
 import java.io.InputStream;

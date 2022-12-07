@@ -1,5 +1,6 @@
-package com.kazurayam.materialstore.base.materialize;
+package com.kazurayam.inspectus.net;
 
+import com.kazurayam.inspectus.net.URLMaterializingFunctions;
 import org.apache.hc.core5.http.Header;
 import org.apache.hc.core5.http.message.BasicHeader;
 import org.junit.jupiter.api.Test;
@@ -14,8 +15,7 @@ public class DigestedResponseTest {
 
     @Test
     void test_CONTENT_TYPE_PATTERN_text() {
-        Matcher m = MaterializingWebResourceFunctions
-                .DigestedResponse.CONTENT_TYPE_PATTERN
+        Matcher m = DigestedResponse.CONTENT_TYPE_PATTERN
                 .matcher("text/html; charset=UTF-8");
         assertTrue(m.matches());
         assertEquals(5, m.groupCount());
@@ -28,8 +28,7 @@ public class DigestedResponseTest {
 
     @Test
     void test_CONTENT_TYPE_PATTERN_multipart() {
-        Matcher m = MaterializingWebResourceFunctions
-                .DigestedResponse.CONTENT_TYPE_PATTERN
+        Matcher m = DigestedResponse.CONTENT_TYPE_PATTERN
                 .matcher("multipart/form-data; boundary=something");
         assertTrue(m.matches());
         assertEquals(5, m.groupCount());
@@ -41,9 +40,8 @@ public class DigestedResponseTest {
 
     @Test
     public void test_getMediaType() {
-        MaterializingWebResourceFunctions.DigestedResponse response =
-                new MaterializingWebResourceFunctions
-                        .DigestedResponse("console.log(\"Hello\");".getBytes());
+        DigestedResponse response =
+                new DigestedResponse("console.log(\"Hello\");".getBytes());
         Header contentType = new BasicHeader("ContentType",
                 "application/javascript; charset=UTF-8");
         response.setContentType(contentType);
@@ -52,9 +50,8 @@ public class DigestedResponseTest {
 
     @Test
     public void test_getCharset() {
-        MaterializingWebResourceFunctions.DigestedResponse response =
-                new MaterializingWebResourceFunctions
-                        .DigestedResponse("console.log(\"Hello\");".getBytes());
+        DigestedResponse response =
+                new DigestedResponse("console.log(\"Hello\");".getBytes());
         Header contentType = new BasicHeader("ContentType",
                 "application/javascript; charset=UTF-8");
         response.setContentType(contentType);

@@ -1,5 +1,7 @@
-package com.kazurayam.materialstore.base.materialize;
+package com.kazurayam.inspectus.selenium;
 
+import com.kazurayam.inspectus.TestHelper;
+import com.kazurayam.inspectus.discovery.Target;
 import com.kazurayam.materialstore.core.filesystem.FileType;
 import com.kazurayam.materialstore.core.filesystem.JobName;
 import com.kazurayam.materialstore.core.filesystem.JobTimestamp;
@@ -9,7 +11,6 @@ import com.kazurayam.materialstore.core.filesystem.QueryOnMetadata;
 import com.kazurayam.materialstore.core.filesystem.Store;
 import com.kazurayam.materialstore.core.filesystem.Stores;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +24,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Map;
 
@@ -31,23 +31,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MaterializingPageFunctionsTest {
-
-    private static Path outputDir =
-            Paths.get(System.getProperty("user.dir"))
-                    .resolve("build/tmp/testOutput")
-                    .resolve(MaterializingPageFunctionsTest.class.getName());
+public class PageMaterializingFunctionsTest {
 
     private static Store store;
     private WebDriver driver;
 
     @BeforeAll
     public static void beforeAll() throws IOException {
-        if (Files.exists(outputDir)) {
-            FileUtils.deleteDirectory(outputDir.toFile());
-        }
-        Files.createDirectories(outputDir);
-        Path root = outputDir.resolve("store");
+        Path testCaseOutputDir =
+                TestHelper.createTestClassOutputDir(PageMaterializingFunctionsTest.class);
+        Path root = testCaseOutputDir.resolve("store");
         store = Stores.newInstance(root);
         WebDriverManager.chromedriver().setup();
     }
@@ -67,12 +60,13 @@ public class MaterializingPageFunctionsTest {
                 .build();
         JobName jobName = new JobName("test_storeHTMLSource");
         JobTimestamp jobTimestamp = JobTimestamp.now();
-        StorageDirectory storageDirectory = new StorageDirectory(store, jobName, jobTimestamp);
         // open the page in browser
         driver.navigate().to(target.getUrl());
         // get HTML source of the page, save it into the store
         Map<String, String> attribute = Collections.singletonMap("step", "01");
-        Material createdMaterial  = MaterializingPageFunctions.storeHTMLSource.accept(target, driver, storageDirectory, attribute);
+        PageMaterializingFunctions pmf = new PageMaterializingFunctions(store, jobName, jobTimestamp);
+        Material createdMaterial =
+                pmf.storeHTMLSource.accept(driver, target, attribute);
         assertNotNull(createdMaterial);
         // assert that a material has been created
         Material selectedMaterial = store.selectSingle(jobName, jobTimestamp, FileType.HTML, QueryOnMetadata.ANY);
@@ -87,12 +81,13 @@ public class MaterializingPageFunctionsTest {
                 .build();
         JobName jobName = new JobName("test_storeEntirePageScreenshot");
         JobTimestamp jobTimestamp = JobTimestamp.now();
-        StorageDirectory storageDirectory = new StorageDirectory(store, jobName, jobTimestamp);
         // open the page in browser
         driver.navigate().to(target.getUrl());
         // take an entire page screenshot, write the image into the store
         Map<String, String> attribute = Collections.singletonMap("step", "01");
-        Material createdMaterial = MaterializingPageFunctions.storeEntirePageScreenshot.accept(target, driver, storageDirectory, attribute);
+        PageMaterializingFunctions pmf = new PageMaterializingFunctions(store, jobName, jobTimestamp);
+        Material createdMaterial =
+                pmf.storeEntirePageScreenshot.accept(driver, target, attribute);
         assertNotNull(createdMaterial);
         // assert that a material has been created
         Material selectedMaterial = store.selectSingle(jobName, jobTimestamp, FileType.PNG, QueryOnMetadata.ANY);

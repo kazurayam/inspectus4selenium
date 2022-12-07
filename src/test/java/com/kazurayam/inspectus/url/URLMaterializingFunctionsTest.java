@@ -1,5 +1,7 @@
-package com.kazurayam.materialstore.base.materialize;
+package com.kazurayam.inspectus.net;
 
+import com.kazurayam.inspectus.TestHelper;
+import com.kazurayam.inspectus.discovery.Target;
 import com.kazurayam.materialstore.core.filesystem.FileType;
 import com.kazurayam.materialstore.core.filesystem.JobName;
 import com.kazurayam.materialstore.core.filesystem.JobTimestamp;
@@ -8,33 +10,22 @@ import com.kazurayam.materialstore.core.filesystem.MaterialstoreException;
 import com.kazurayam.materialstore.core.filesystem.QueryOnMetadata;
 import com.kazurayam.materialstore.core.filesystem.Store;
 import com.kazurayam.materialstore.core.filesystem.Stores;
-import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MaterializeWebResourceFunctionsTest {
-
-    private static final Path outputDir =
-            Paths.get(System.getProperty("user.dir"))
-                    .resolve("build/tmp/testOutput")
-                    .resolve(MaterializingPageFunctionsTest.class.getName());
+public class URLMaterializingFunctionsTest {
 
     private static Store store;
 
     @BeforeAll
-    public static void beforeAll() throws IOException {
-        if (Files.exists(outputDir)) {
-            FileUtils.deleteDirectory(outputDir.toFile());
-        }
-        Files.createDirectories(outputDir);
-        Path root = outputDir.resolve("store");
+    public static void beforeAll() {
+        Path testCaseOutputDir =
+                TestHelper.createTestClassOutputDir(URLMaterializingFunctionsTest.class);
+        Path root = testCaseOutputDir.resolve("store");
         store = Stores.newInstance(root);
     }
 
@@ -46,8 +37,8 @@ public class MaterializeWebResourceFunctionsTest {
                         .build();
         JobName jobName = new JobName("test_storeWebResource_jpg");
         JobTimestamp jobTimestamp = JobTimestamp.now();
-        StorageDirectory storageDirectory = new StorageDirectory(store, jobName, jobTimestamp);
-        MaterializingWebResourceFunctions.storeWebResource.accept(target, storageDirectory);
+        URLMaterializingFunctions umf = new URLMaterializingFunctions(store, jobName, jobTimestamp);
+        umf.storeURL.accept(target);
         //
         Material material = store.selectSingle(jobName, jobTimestamp, QueryOnMetadata.ANY);
         assertEquals(FileType.JPG, material.getFileType());
@@ -60,8 +51,8 @@ public class MaterializeWebResourceFunctionsTest {
                 .build();
         JobName jobName = new JobName("test_storeWebResource_js");
         JobTimestamp jobTimestamp = JobTimestamp.now();
-        StorageDirectory storageDirectory = new StorageDirectory(store, jobName, jobTimestamp);
-        MaterializingWebResourceFunctions.storeWebResource.accept(target, storageDirectory);
+        URLMaterializingFunctions umf = new URLMaterializingFunctions(store, jobName, jobTimestamp);
+        umf.storeURL.accept(target);
         //
         Material material = store.selectSingle(jobName, jobTimestamp);
         assertEquals(FileType.JS, material.getFileType());
@@ -74,8 +65,8 @@ public class MaterializeWebResourceFunctionsTest {
                 .build();
         JobName jobName = new JobName("test_storeWebResource_xls");
         JobTimestamp jobTimestamp = JobTimestamp.now();
-        StorageDirectory storageDirectory = new StorageDirectory(store, jobName, jobTimestamp);
-        MaterializingWebResourceFunctions.storeWebResource.accept(target, storageDirectory);
+        URLMaterializingFunctions umf = new URLMaterializingFunctions(store, jobName, jobTimestamp);
+        umf.storeURL.accept(target);
         //
         Material material = store.selectSingle(jobName, jobTimestamp);
         assertEquals(FileType.XLS, material.getFileType());
@@ -88,8 +79,8 @@ public class MaterializeWebResourceFunctionsTest {
                 .build();
         JobName jobName = new JobName("test_storeWebResource_pdf");
         JobTimestamp jobTimestamp = JobTimestamp.now();
-        StorageDirectory storageDirectory = new StorageDirectory(store, jobName, jobTimestamp);
-        MaterializingWebResourceFunctions.storeWebResource.accept(target, storageDirectory);
+        URLMaterializingFunctions umf = new URLMaterializingFunctions(store, jobName, jobTimestamp);
+        umf.storeURL.accept(target);
         //
         Material material = store.selectSingle(jobName, jobTimestamp);
         assertEquals(FileType.PDF, material.getFileType());
@@ -104,8 +95,8 @@ public class MaterializeWebResourceFunctionsTest {
                 .build();
         JobName jobName = new JobName("test_storeWebResource_css");
         JobTimestamp jobTimestamp = JobTimestamp.now();
-        StorageDirectory storageDirectory = new StorageDirectory(store, jobName, jobTimestamp);
-        MaterializingWebResourceFunctions.storeWebResource.accept(target, storageDirectory);
+        URLMaterializingFunctions umf = new URLMaterializingFunctions(store, jobName, jobTimestamp);
+        umf.storeURL.accept(target);
         //
         Material material = store.selectSingle(jobName, jobTimestamp);
         assertEquals(FileType.CSS, material.getFileType());
