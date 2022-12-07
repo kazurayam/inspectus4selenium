@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.kazurayam'
-version '0.1.1'
+version '0.2.0'
 
 ext {
     isReleaseVersion = !version.endsWith('SNAPSHOT')
@@ -14,13 +14,31 @@ ext {
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/kazurayam/inspectus")
+        credentials {
+            username = project.findProperty("gpr.user")
+            password = project.findProperty("gpr.key")
+        }
+    }
+    maven {
+        url = uri("https://maven.pkg.github.com/kazurayam/materialstore")
+        credentials {
+            username = project.findProperty("gpr.user")
+            password = project.findProperty("gpr.key")
+        }
+    }
+    mavenLocal()
 }
 
 dependencies {
+    implementation libs.ashot
+    implementation libs.httpclient
+    implementation libs.jsoup
+    implementation libs.materialstore
     implementation libs.slf4j.api
     testRuntimeOnly libs.slf4j.simple
     testImplementation libs.webdrivermanager
-    testImplementation libs.junit.jupiter
     testImplementation libs.junit.jupiter.api
     testRuntimeOnly libs.junit.jupiter.engine
 }
@@ -78,8 +96,10 @@ publishing {
             pom {
                 groupId = project.group
                 name = project.rootProject.name
-                description = 'a java clas library that supports time-based performance measurements and compiling text reports in Markdown format'
-                url = 'https://kazurayam.github.io/timekeeper/'
+
+                description = 'A collection of formulas to drive WebDriver'
+                url = "https://kazurayam.github.io/${project.rootProject.name}/"
+
                 from components.java
                 licenses {
                     license {
