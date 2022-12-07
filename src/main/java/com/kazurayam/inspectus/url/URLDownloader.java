@@ -1,4 +1,4 @@
-package com.kazurayam.inspectus.net;
+package com.kazurayam.inspectus.url;
 
 import java.io.IOException;
 import java.io.InputStream;

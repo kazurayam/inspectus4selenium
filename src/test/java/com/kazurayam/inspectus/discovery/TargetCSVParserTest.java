@@ -1,5 +1,7 @@
-package com.kazurayam.materialstore.base.materialize;
+package com.kazurayam.inspectus.discovery;
 
+import com.kazurayam.inspectus.discovery.SimpleTargetCSVParser;
+import com.kazurayam.inspectus.discovery.Target;
 import com.kazurayam.materialstore.core.filesystem.MaterialstoreException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

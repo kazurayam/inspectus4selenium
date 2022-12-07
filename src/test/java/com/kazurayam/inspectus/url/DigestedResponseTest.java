@@ -1,6 +1,5 @@
-package com.kazurayam.inspectus.net;
+package com.kazurayam.inspectus.url;
 
-import com.kazurayam.inspectus.net.URLMaterializingFunctions;
 import org.apache.hc.core5.http.Header;
 import org.apache.hc.core5.http.message.BasicHeader;
 import org.junit.jupiter.api.Test;

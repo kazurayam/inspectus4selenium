@@ -1,5 +1,6 @@
-package com.kazurayam.materialstore.base.materialize;
+package com.kazurayam.inspectus.discovery;
 
+import com.kazurayam.inspectus.discovery.Target;
 import com.kazurayam.materialstore.core.filesystem.MaterialstoreException;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;

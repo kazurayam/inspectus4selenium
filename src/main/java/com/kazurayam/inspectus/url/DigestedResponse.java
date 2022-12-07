@@ -1,4 +1,4 @@
-package com.kazurayam.inspectus.net;
+package com.kazurayam.inspectus.url;
 
 import org.apache.hc.core5.http.Header;
 import org.slf4j.Logger;

@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PageMaterializingFunctionsTest {
+public class WebPageMaterializingFunctionsTest {
 
     private static Store store;
     private WebDriver driver;
@@ -39,7 +39,7 @@ public class PageMaterializingFunctionsTest {
     @BeforeAll
     public static void beforeAll() throws IOException {
         Path testCaseOutputDir =
-                TestHelper.createTestClassOutputDir(PageMaterializingFunctionsTest.class);
+                TestHelper.createTestClassOutputDir(WebPageMaterializingFunctionsTest.class);
         Path root = testCaseOutputDir.resolve("store");
         store = Stores.newInstance(root);
         WebDriverManager.chromedriver().setup();
@@ -64,7 +64,7 @@ public class PageMaterializingFunctionsTest {
         driver.navigate().to(target.getUrl());
         // get HTML source of the page, save it into the store
         Map<String, String> attribute = Collections.singletonMap("step", "01");
-        PageMaterializingFunctions pmf = new PageMaterializingFunctions(store, jobName, jobTimestamp);
+        WebPageMaterializingFunctions pmf = new WebPageMaterializingFunctions(store, jobName, jobTimestamp);
         Material createdMaterial =
                 pmf.storeHTMLSource.accept(driver, target, attribute);
         assertNotNull(createdMaterial);
@@ -85,7 +85,7 @@ public class PageMaterializingFunctionsTest {
         driver.navigate().to(target.getUrl());
         // take an entire page screenshot, write the image into the store
         Map<String, String> attribute = Collections.singletonMap("step", "01");
-        PageMaterializingFunctions pmf = new PageMaterializingFunctions(store, jobName, jobTimestamp);
+        WebPageMaterializingFunctions pmf = new WebPageMaterializingFunctions(store, jobName, jobTimestamp);
         Material createdMaterial =
                 pmf.storeEntirePageScreenshot.accept(driver, target, attribute);
         assertNotNull(createdMaterial);

@@ -21,13 +21,13 @@ import java.awt.image.BufferedImage;
 import java.util.Map;
 import java.util.Objects;
 
-public class PageMaterializingFunctions {
+public class WebPageMaterializingFunctions {
 
     private Store store;
     private JobName jobName;
     private JobTimestamp jobTimestamp;
 
-    public PageMaterializingFunctions(Store store, JobName jobName, JobTimestamp jobTimestamp) {
+    public WebPageMaterializingFunctions(Store store, JobName jobName, JobTimestamp jobTimestamp) {
         Objects.requireNonNull(store);
         Objects.requireNonNull(jobName);
         Objects.requireNonNull(jobTimestamp);
@@ -40,7 +40,7 @@ public class PageMaterializingFunctions {
      * get HTML source of the target web page, pretty-print it, save it into
      * the store
      */
-    public PageMaterializingFunction<WebDriver, Target, Map<String,String>, Material>
+    public WebPageMaterializingFunction<WebDriver, Target, Map<String,String>, Material>
             storeHTMLSource = (driver, target, attributes) -> {
         Objects.requireNonNull(driver);
         Objects.requireNonNull(target);
@@ -65,7 +65,7 @@ public class PageMaterializingFunctions {
     /**
      *
      */
-    public PageMaterializingFunction<WebDriver, Target, Map<String,String>, Material>
+    public WebPageMaterializingFunction<WebDriver, Target, Map<String,String>, Material>
             storeEntirePageScreenshot = (driver, target, attributes) -> {
         Objects.requireNonNull(driver);
         Objects.requireNonNull(target);

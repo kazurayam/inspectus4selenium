@@ -1,4 +1,4 @@
-package com.kazurayam.inspectus.net;
+package com.kazurayam.inspectus.url;
 
 import com.kazurayam.inspectus.TestHelper;
 import com.kazurayam.materialstore.core.filesystem.FileType;

@@ -1,4 +1,4 @@
-package com.kazurayam.inspectus.selenium;
+package com.kazurayam.inspectus;
 
 import com.kazurayam.materialstore.core.util.CopyDir;
 import com.kazurayam.materialstore.core.util.DeleteDir;
