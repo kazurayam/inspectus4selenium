@@ -14,6 +14,21 @@ ext {
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/kazurayam/inspectus")
+        credentials {
+            username = project.findProperty("gpr.user")
+            password = project.findProperty("gpr.key")
+        }
+    }
+    maven {
+        url = uri("https://maven.pkg.github.com/kazurayam/materialstore")
+        credentials {
+            username = project.findProperty("gpr.user")
+            password = project.findProperty("gpr.key")
+        }
+    }
+    mavenLocal()
 }
 
 dependencies {
@@ -24,7 +39,6 @@ dependencies {
     implementation libs.slf4j.api
     testRuntimeOnly libs.slf4j.simple
     testImplementation libs.webdrivermanager
-    testImplementation libs.junit.jupiter
     testImplementation libs.junit.jupiter.api
     testRuntimeOnly libs.junit.jupiter.engine
 }
