@@ -16,6 +16,16 @@ import java.util.Map;
  */
 public final class Target implements Jsonifiable {
 
+    public static final Target NULL_OBJECT;
+
+    static {
+        try {
+            NULL_OBJECT = new Builder("https://example.com/").build();
+        } catch (MaterialstoreException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private final URL url;
     private final By handle;
     private final ImmutableMap<String, String> attributes;
@@ -126,7 +136,25 @@ public final class Target implements Jsonifiable {
         }
     }
 
+    @Override
+    public String toString() {
+        return this.toJson();
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Target)) {
+            return false;
+        }
+        Target other = (Target)obj;
+        return this.getUrl().equals(other.getUrl()) &&
+                this.getHandle().equals(other.getHandle());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getUrl().hashCode();
+    }
 
     /**
      *
@@ -144,6 +172,10 @@ public final class Target implements Jsonifiable {
         }
         public Builder(URL url) {
             this.url = url;
+        }
+        public Builder(Target source) {
+            this.url = source.getUrl();
+            this.handle = source.getHandle();
         }
         public Builder handle(By handle) {
             this.handle = handle;
