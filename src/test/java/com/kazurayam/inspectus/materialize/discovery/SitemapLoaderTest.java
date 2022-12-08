@@ -12,11 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SitemapLoaderTest {
 
-    private Path fixtureDir = TestHelper.getFixturesDirectory().resolve("com/kazurayam/inspectus/materialize/discovery/SiteMapLoaderTest");
+    private final Path fixtureDir =
+            TestHelper.getFixturesDirectory()
+                    .resolve("com/kazurayam/inspectus/materialize/discovery/SiteMapLoaderTest");
 
     @BeforeEach
     public void setup() {
-        assert Files.exists(fixtureDir);
+        //assert Files.exists(fixtureDir);
     }
 
     @Test
