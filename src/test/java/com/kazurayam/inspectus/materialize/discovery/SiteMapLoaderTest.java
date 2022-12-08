@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class SiteMapLoaderTest {
 
     private Path fixtureDir = TestHelper.getFixturesDirectory().resolve("com/kazurayam/inspectus/materialize/discovery/SiteMapLoaderTest");
@@ -19,7 +21,7 @@ public class SiteMapLoaderTest {
     }
 
     @Test
-    public void test_parseJson_Path() throws MaterialstoreException, IOException {
+    public void test_parseJson_Path() throws MaterialstoreException {
         Path json = fixtureDir.resolve("sitemap.json");
         assert Files.exists(json);
         Target baseTopPage = Target.builder("http://myadmin.kazurayam.com").build();
@@ -30,7 +32,20 @@ public class SiteMapLoaderTest {
     }
 
     @Test
-    public void test_parseCSV_File() {
-        throw new RuntimeException("TODO");
+    public void test_parseCSV_File() throws MaterialstoreException {
+        Path csv = fixtureDir.resolve("sitemap.csv");
+        assert Files.exists(csv);
+        Target baseTopPage = Target.builder("http://myadmin.kazurayam.com").build();
+        Target twinTopPage = Target.builder("http://devadmin.kazurayam.com").build();
+        SitemapLoader loader = new SitemapLoader(baseTopPage, twinTopPage);
+        Sitemap sitemap = loader.parseCSV(csv);
+        System.out.println(sitemap.toJson(true));
+        assertEquals(3, sitemap.size());
+        assertEquals("http://myadmin.kazurayam.com/proverbs.html",
+                sitemap.getBaseTarget(2).getUrl().toString());
+        assertEquals("By.cssSelector: #main",
+                sitemap.getBaseTarget(2).getHandle().toString());
+        assertEquals("03",
+                sitemap.getBaseTarget(2).getAttributes().get("step"));
     }
 }

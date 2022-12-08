@@ -5,13 +5,22 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kazurayam.materialstore.core.filesystem.MaterialstoreException;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public final class SitemapLoader {
 
@@ -54,13 +63,33 @@ public final class SitemapLoader {
         return this.parseJson(jsonFile.toPath());
     }
 
-    public Sitemap parseCSV(String csvText) {
+    public Sitemap parseCSV(String csvText) throws MaterialstoreException {
         Objects.requireNonNull(csvText);
         if (baseTopPage == Target.NULL_OBJECT) {
             throw new IllegalArgumentException("baseTopPage is required but not set");
         }
-        //
-        throw new RuntimeException("TODO");
+        Reader in = new StringReader(csvText);
+        CSVFormat csvFormat =
+                CSVFormat.RFC4180.builder().setHeader()
+                        .setSkipHeaderRecord(true).build();
+        Sitemap sitemap = new Sitemap(baseTopPage, twinTopPage);
+        try {
+            Iterable<CSVRecord> records = csvFormat.parse(in);
+            for (CSVRecord record : records) {
+                Map<String,String> map = record.toMap();
+                URL url = new URL(map.get("url"));
+                Handle handle = Handle.deserialize(map.get("handle"));
+                map.remove("url");
+                map.remove("handle");
+                Target t =
+                        Target.builder(url).handle(handle)
+                                .putAll(map).build();
+                sitemap.add(t);
+            }
+        } catch (IOException e) {
+            throw new MaterialstoreException(e);
+        }
+        return sitemap;
     }
 
     public Sitemap parseCSV(Path csvPath) throws MaterialstoreException {
