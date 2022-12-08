@@ -39,7 +39,7 @@ public class SitemapTest {
     @Test
     public void test_constructorSingle(){
         Sitemap sm = new Sitemap(baseTopPage);
-        assertEquals(1, sm.size());
+        assertEquals(0, sm.size());
         assertEquals(baseTopPage, sm.getBaseTopPage());
         assertEquals(Target.NULL_OBJECT, sm.getTwinTopPage());
     }
@@ -47,7 +47,7 @@ public class SitemapTest {
     @Test
     public void test_constructorTwin() {
         Sitemap sm = new Sitemap(baseTopPage, twinTopPage);
-        assertEquals(1, sm.size());
+        assertEquals(0, sm.size());
         assertEquals(baseTopPage, sm.getBaseTopPage());
         assertEquals(twinTopPage, sm.getTwinTopPage());
     }
@@ -58,7 +58,7 @@ public class SitemapTest {
         sm.add(baseIndex);
         sm.add(baseRepositories);
         sm.add(baseProverbs);
-        assertEquals(4, sm.size());
+        assertEquals(3, sm.size());
     }
 
     @Test
@@ -68,16 +68,16 @@ public class SitemapTest {
         sm.add("/repositories.html", new Handle(By.xpath("//*[@id='main']")));
         sm.add("proverbs.html", new Handle(By.cssSelector("#main")));
         List<Target> baseTargetList = sm.getBaseTargetList();
-        for (int i = 1; i < baseTargetList.size(); i++) {
+        for (int i = 0; i < baseTargetList.size(); i++) {
             logger.info(String.format("[test_add_target_asFile] %d %s",
                     i, sm.getBaseTarget(i).toJson()) );
         }
         assertEquals("http://myadmin.kazurayam.com/index.html",
-                baseTargetList.get(1).getUrl().toString());
+                baseTargetList.get(0).getUrl().toString());
         assertEquals("http://myadmin.kazurayam.com/repositories.html",
-                baseTargetList.get(2).getUrl().toString());
+                baseTargetList.get(1).getUrl().toString());
         assertEquals("http://myadmin.kazurayam.com/proverbs.html",
-                baseTargetList.get(3).getUrl().toString());
+                baseTargetList.get(2).getUrl().toString());
     }
 
     @Test
@@ -93,7 +93,7 @@ public class SitemapTest {
         Sitemap sm = new Sitemap(baseTopPage, twinTopPage);
         sm.add(baseIndex);
         assertEquals("devadmin.kazurayam.com",
-                sm.getTwinTarget(1).getUrl().getHost());
+                sm.getTwinTarget(0).getUrl().getHost());
     }
 
     @Test
@@ -103,7 +103,7 @@ public class SitemapTest {
         sm.add(baseRepositories);
         sm.add(baseProverbs);
         List<Target> list = sm.getBaseTargetList();
-        assertEquals(4, list.size());
+        assertEquals(3, list.size());
         for (Target t : list) {
             logger.info("[test_getBaseTargetList] " + t.toJson());
         }
@@ -116,7 +116,7 @@ public class SitemapTest {
         sm.add(baseRepositories);
         sm.add(baseProverbs);
         List<Target> list = sm.getTwinTargetList();
-        assertEquals(4, list.size());
+        assertEquals(3, list.size());
         for (Target t : list) {
             logger.info("[test_getTwinTargetList] " + t.toJson());
         }

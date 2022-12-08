@@ -5,13 +5,12 @@ import com.kazurayam.materialstore.core.filesystem.MaterialstoreException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SiteMapLoaderTest {
+public class SitemapLoaderTest {
 
     private Path fixtureDir = TestHelper.getFixturesDirectory().resolve("com/kazurayam/inspectus/materialize/discovery/SiteMapLoaderTest");
 
