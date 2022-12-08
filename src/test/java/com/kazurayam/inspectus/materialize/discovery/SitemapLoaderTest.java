@@ -18,8 +18,9 @@ public class SitemapLoaderTest {
 
     @BeforeEach
     public void setup() {
-        System.out.printf("fixtureDir=%s", fixtureDir.toString());
-        assert Files.exists(fixtureDir);
+        assert Files.exists(fixtureDir) :
+                String.format("fixtureDir=%s not present",
+                        fixtureDir.toAbsolutePath().toString());
     }
 
     @Test
