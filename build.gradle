@@ -33,6 +33,7 @@ repositories {
 
 dependencies {
     implementation libs.ashot
+    implementation libs.commons.csv
     implementation libs.httpclient
     implementation libs.jsoup
     implementation libs.materialstore
