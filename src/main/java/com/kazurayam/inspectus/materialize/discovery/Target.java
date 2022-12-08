@@ -182,6 +182,7 @@ public final class Target implements Jsonifiable {
      *     }
      * </PRE>
      * @return an instance of Target class constructed from a String in JSON format
+     * @throws MaterialstoreException when failed deserializing this
      */
     public static Target deserialize(String jsonText)
             throws MaterialstoreException {

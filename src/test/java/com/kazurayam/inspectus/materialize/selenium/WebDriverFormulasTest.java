@@ -66,7 +66,7 @@ public class WebDriverFormulasTest {
         By search_form =
                 By.cssSelector("#search_form");
         formulas.navigateByClick(driver, search_button_homepage,
-                search_form, 10);
+                search_form, 30);
         assertTrue(driver.getCurrentUrl()
                 .startsWith("https://duckduckgo.com/?q=selenium"));
     }
