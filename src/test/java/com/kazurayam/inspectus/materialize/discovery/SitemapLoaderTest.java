@@ -14,7 +14,7 @@ public class SitemapLoaderTest {
 
     private final Path fixtureDir =
             TestHelper.getFixturesDirectory()
-                    .resolve("com/kazurayam/inspectus/materialize/discovery/SiteMapLoaderTest");
+                    .resolve("com/kazurayam/inspectus/materialize/discovery/SitemapLoaderTest");
 
     @BeforeEach
     public void setup() {
