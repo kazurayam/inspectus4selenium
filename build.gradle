@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.kazurayam'
-version '0.2.0'
+version '0.3.1'
 
 ext {
     isReleaseVersion = !version.endsWith('SNAPSHOT')
@@ -33,6 +33,7 @@ repositories {
 
 dependencies {
     implementation libs.ashot
+    implementation libs.commons.csv
     implementation libs.httpclient
     implementation libs.jsoup
     implementation libs.materialstore

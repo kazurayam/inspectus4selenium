@@ -6,7 +6,7 @@ Back to the link:https://github.com/kazurayam/inspectus4selenium[project's GitHu
 
 The inspectus4selenium provides a small Java class
 
-- https://github.com/kazurayam/inspectus4selenium/blob/master/src/main/java/com/kazurayam/inspectus/selenium/WebDriverFormulas.java[com.kazurayam.inspectus.selenium.WebDriverFormulas]
+- https://github.com/kazurayam/inspectus4selenium/blob/master/src/main/java/com/kazurayam/inspectus/selenium/WebDriverFormulas.java[selenium.com.kazurayam.inspectus.materialize.WebDriverFormulas]
 
 When you write a web UI test on top of link:https://www.selenium.dev/documentation/webdriver/[Selenium WebDriver], you need to be aware of timing issues: you have to repeat writing codes so that your tests wait for pages to be loaded into the browser completely; you have to wait for web element to be present in the DOM before doing any action on it. You will write codes to wait for conditions to meet repeatedly. Your UI tests tend to be verbose and difficult to maintain.
 
