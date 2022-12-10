@@ -48,24 +48,28 @@ tasks.withType(JavaCompile) {
     options.compilerArgs << '-Xlint:unchecked'
 }
 
-test {
+tasks.withType(Test) {
     useJUnitPlatform()
+}
+
+test {
+    exclude "**/selenium/*"
     finalizedBy jacocoTestReport
 }
 
 // https://stackoverflow.com/questions/56796676/gradle-how-to-run-a-custom-task-with-a-custom-configuration
-task testWithSelenium3(type: Test, dependsOn: test) {
+task testWithSelenium3(type: Test, dependsOn: compileTestJava) {
     dependencies {
         implementation libs.selenium3
     }
-    testClassesDirs = sourceSets.test.output.classesDirs
+    include "**/selenium/*"
 }
 
-task testWithSelenium4(type: Test, dependsOn: test) {
+task testWithSelenium4(type: Test, dependsOn: compileTestJava) {
     dependencies {
         implementation libs.selenium4
     }
-    testClassesDirs = sourceSets.test.output.classesDirs
+    include "**/selenium/*"
 }
 
 task testBoth(dependsOn: [testWithSelenium3, testWithSelenium4])
