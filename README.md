@@ -1,8 +1,5 @@
 # inspectus4selenium
 
-See https://kazurayam.github.io/inspectus4selenium/
+This project has been suspended.
 
----
-
-
-As https://github.com/kazurayam/inspectus4selenium/issues/24 describes, the source code in this project was already migrated into the "inspecuts" project. So this project will be no more updated.
+The `com.kazurayam.inspectus.materialize.*` package was migrated into the https://github.com/kazurayam/inspectus/ project.
