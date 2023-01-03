@@ -35,6 +35,7 @@ dependencies {
     implementation libs.ashot
     implementation libs.commons.csv
     implementation libs.httpclient
+    implementation libs.inspectus
     implementation libs.jsoup
     implementation libs.materialstore
     implementation libs.slf4j.api
