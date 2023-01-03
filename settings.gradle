@@ -16,6 +16,9 @@ dependencyResolutionManagement {
             version('httpclient', '5.2')
             library('httpclient', 'org.apache.httpcomponents.client5', 'httpclient5').versionRef('httpclient')
 
+            version('inspectus', '0.8.2')
+            library('inspectus', 'com.kazurayam', 'inspectus'). versionRef('inspectus')
+
             version('jsoup', '1.14.3')
             library('jsoup', 'org.jsoup', 'jsoup').versionRef('jsoup')
 
