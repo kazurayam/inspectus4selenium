@@ -16,7 +16,7 @@ dependencyResolutionManagement {
             version('httpclient', '5.2')
             library('httpclient', 'org.apache.httpcomponents.client5', 'httpclient5').versionRef('httpclient')
 
-            version('inspectus', '0.8.2')
+            version('inspectus', '0.9.0')
             library('inspectus', 'com.kazurayam', 'inspectus'). versionRef('inspectus')
 
             version('jsoup', '1.14.3')
@@ -26,7 +26,7 @@ dependencyResolutionManagement {
             library('junit-jupiter-api', 'org.junit.jupiter', 'junit-jupiter-api').versionRef('junit5')
             library('junit-jupiter-engine', 'org.junit.jupiter', 'junit-jupiter-engine').versionRef('junit5')
 
-            version('materialstore', '0.14.0')
+            version('materialstore', '0.16.0')
             library('materialstore', 'com.kazurayam', 'materialstore').versionRef('materialstore')
 
             version('selenium3', '3.141.59')
